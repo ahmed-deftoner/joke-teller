@@ -8,8 +8,8 @@ import { jokeWorkflow } from "./workflows/joke-workflow";
 import { LangfuseExporter } from "langfuse-vercel";
 
 export const mastra = new Mastra({
-  workflows: { weatherWorkflow, jokeWorkflow },
-  agents: { weatherAgent, jokeAgent },
+  workflows: { jokeWorkflow },
+  agents: { jokeAgent },
   storage: new LibSQLStore({
     // stores telemetry, evals, ... into memory storage, if it needs to persist, change to file:../mastra.db
     url: ":memory:",
