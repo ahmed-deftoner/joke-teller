@@ -30,22 +30,16 @@ const tellJoke = createStep({
     }
 
     const prompt = `Create a ${inputData.jokeFormat} joke about "${inputData.topic}". Keep it short and funny.`;
-    const response = await agent.stream([
+
+    const response = await agent.generate([
       {
         role: "user",
         content: prompt,
       },
     ]);
 
-    let jokeText = "";
-
-    for await (const chunk of response.textStream) {
-      process.stdout.write(chunk);
-      jokeText += chunk;
-    }
-
     return {
-      joke: jokeText,
+      joke: response.text,
     };
   },
 });
@@ -64,22 +58,15 @@ const polishPunchline = createStep({
     }
 
     const prompt = `Polish the punchline of the joke: ${inputData.joke}`;
-    const response = await agent.stream([
+    const response = await agent.generate([
       {
         role: "user",
         content: prompt,
       },
     ]);
 
-    let jokeText = "";
-
-    for await (const chunk of response.textStream) {
-      process.stdout.write(chunk);
-      jokeText += chunk;
-    }
-
     return {
-      joke: jokeText,
+      joke: response.text,
     };
   },
 });
@@ -100,22 +87,15 @@ const rateJoke = createStep({
     }
 
     const prompt = `Rate the joke: ${inputData.joke}`;
-    const response = await agent.stream([
+    const response = await agent.generate([
       {
         role: "user",
         content: prompt,
       },
     ]);
 
-    let ratingText = "";
-
-    for await (const chunk of response.textStream) {
-      process.stdout.write(chunk);
-      ratingText += chunk;
-    }
-
     return {
-      rating: ratingText,
+      rating: response.text,
     };
   },
 });
